@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class data {
     public static ArrayList<Planet> planets = new ArrayList<Planet>();
     public static String[] taillePlanetes = {"4900", "12000", "12800", "6800", "144000", "120000", "52000", "50000", "2300"};
+    public static  boolean auth = false;
 
     public static void initialize(){
         planets = new ArrayList<Planet>();

@@ -3,6 +3,7 @@ package com.example.listplanete;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,20 +30,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        data.initialize();
-        setContentView(R.layout.activity_main);
+        if(!data.auth){
+            startActivity(new Intent(MainActivity.this, Login.class));
+        }
+        else {
+            data.initialize();
+            setContentView(R.layout.activity_main);
 
-        listview = (ListView) findViewById(R.id.listView);
+            listview = (ListView) findViewById(R.id.listView);
 
 
+            this.context = getApplicationContext();
 
-        this.context = getApplicationContext();
+            adapter = new PlaneteAdapter(this);
+            listview.setAdapter(adapter);
 
-        adapter = new PlaneteAdapter(this);
-        listview.setAdapter(adapter);
-
-        verifier = (Button) findViewById(R.id.verifier);
-        verifier.setOnClickListener(verifierListener);
+            verifier = (Button) findViewById(R.id.verifier);
+            verifier.setOnClickListener(verifierListener);
+        }
     }
 
     private View.OnClickListener verifierListener = new View.OnClickListener() {
